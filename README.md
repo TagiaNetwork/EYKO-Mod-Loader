@@ -4,6 +4,9 @@ This is a mod loader designed for the game Election Year Knockout (info below). 
 # What is Election Year Knockout?
 "Election Year Knockout is a boxing game in the style of the Punch-Out!! series parodying American politics. Set in an alternate reality where literally everything is solved in the boxing ring, even presidential elections, an emerging third-party candidate (controlled by the player) campaigns around the United States of America to battle prominent personalities from the two existing political parties and ascend to the presidency" (https://www.giantbomb.com/election-year-knockout/3030-76110/).
 
+# Community
+![Discord app logo](https://pbs.twimg.com/profile_images/1260953366630264838/rqAiNASF_400x400.jpg)
+
 # Features
 
 soon
