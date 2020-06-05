@@ -1,5 +1,10 @@
 import os, tempfile, json, shutil, functools, distutils
 
+###
+### Election Year Knockout
+### Resource Modification Loader
+###
+
 path = os.getcwd()
 mod_dir = path + "\\Mods"
 
