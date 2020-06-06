@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jun  5 19:11:21 2020
@@ -5,7 +6,7 @@ Created on Fri Jun  5 19:11:21 2020
 @author: Adam
 """
 
-import os, functools
+import os, functools, json
 
 path = os.getcwd()
 
@@ -24,15 +25,11 @@ def get_directory_structure(rootdir):
     return dir
 
 
-colors = get_directory_structure(path + "\\Resources")['Resources']['colors']
-fonts = get_directory_structure(path + "\\Resources")['Resources']['fonts']
-images = get_directory_structure(path + "\\Resources")['Resources']['images']
-music = get_directory_structure(path + "\\Resources")['Resources']['music']
-musichd = get_directory_structure(path + "\\Resources")['Resources']['music-hd']
-particles = get_directory_structure(path + "\\Resources")['Resources']['particles']
-sounds = get_directory_structure(path + "\\Resources")['Resources']['sounds']
-soundshd = get_directory_structure(path + "\\Resources")['Resources']['sounds-hd']
-spines = get_directory_structure(path + "\\Resources")['Resources']['spines']
-strings = get_directory_structure(path + "\\Resources")['Resources']['strings']
+data = get_directory_structure(path + "\\Resources")
 
-print(images)
+for i in data['Resources']:
+    for o in data['Resources'][i]:
+        data['Resources'][i][o] = o
+        
+with open('generated_resource_structure.json', 'w') as outfile:
+    json.dump(data, outfile, indent=4,)
