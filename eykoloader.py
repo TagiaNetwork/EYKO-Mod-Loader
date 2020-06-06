@@ -37,34 +37,6 @@ def modinfo_reader(path):
       data = json.load(f)
     return data # returns dictionary of json data
 
-def get_directory_structure(rootdir):
-    """
-    Creates a nested dictionary that represents the folder structure of rootdir
-    """
-    dir = {}
-    rootdir = rootdir.rstrip(os.sep)
-    start = rootdir.rfind(os.sep) + 1
-    for path, dirs, files in os.walk(rootdir):
-        folders = path[start:].split(os.sep)
-        subdir = dict.fromkeys(files)
-        parent = functools.reduce(dict.get, folders[:-1], dir)
-        parent[folders[-1]] = subdir
-    return dir
-
-
-# Generates dicts for the file struct
-def resources_structure():
-    colors = get_directory_structure(path + "\\Resources")['Resources']['colors']
-    fonts = get_directory_structure(path + "\\Resources")['Resources']['fonts']
-    images = get_directory_structure(path + "\\Resources")['Resources']['images']
-    music = get_directory_structure(path + "\\Resources")['Resources']['music']
-    musichd = get_directory_structure(path + "\\Resources")['Resources']['music-hd']
-    particles = get_directory_structure(path + "\\Resources")['Resources']['particles']
-    sounds = get_directory_structure(path + "\\Resources")['Resources']['sounds']
-    soundshd = get_directory_structure(path + "\\Resources")['Resources']['sounds-hd']
-    spines = get_directory_structure(path + "\\Resources")['Resources']['spines']
-    strings = get_directory_structure(path + "\\Resources")['Resources']['strings']
-
 def recursive_overwrite(src, dest, ignore=None):
     if os.path.isdir(src):
         if not os.path.isdir(dest):
@@ -112,14 +84,16 @@ def mod_loader():
 
 # Clean up afterwards and restore backup
 def cleanup():
-    shutil.rmtree(path + "\\Resources")
-    destination = shutil.copytree(path + "\\Backup", path + "\\Resources")
+    
+    destination = recursive_overwrite(path + "\\Backup", path + "\\Resources")
 
 if directory_checker() == True:
     create_backup()
     generate_structure()
     #resources_structure()
     mod_loader()
+    input('Mod Loaded. Press enter to unload.')
+    cleanup()
 
 else:
     print("Please move " + os.path.basename(__file__) + " to your Election Year Knockout game folder.")
